@@ -1,0 +1,37 @@
+## Build output
+bin/
+obj/
+publish/
+artifacts/
+
+## Visual Studio
+.vs/
+*.user
+*.suo
+
+## Local tooling
+.idea/
+.vscode/
+.dotnet/
+.config/
+
+## Secrets and local configuration
+appsettings.Local.json
+*.publishsettings
+*.pubxml.user
+.env
+.env.*
+!.env.example
+
+## Databases and logs
+*.db
+*.db-shm
+*.db-wal
+*.mdf
+*.ldf
+logs/
+*.log
+
+## OS files
+.DS_Store
+Thumbs.db

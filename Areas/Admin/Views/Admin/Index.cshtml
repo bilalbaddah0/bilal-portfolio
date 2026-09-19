@@ -1,0 +1,137 @@
+@model BilalPortfolio.Areas.Admin.ViewModels.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Messages";
+    Layout = "_AdminLayout";
+    var returnUrl = Url.Action("Index", "Admin", new { search = Model.Search, filter = Model.Filter, page = Model.Page });
+}
+
+<div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-3 mb-4">
+    <div>
+        <p class="text-uppercase text-secondary fw-semibold small mb-1">Admin dashboard</p>
+        <h1 class="h2 mb-1">Contact messages</h1>
+        <p class="text-secondary mb-0">Review and manage enquiries sent through your portfolio.</p>
+    </div>
+</div>
+
+@if (TempData["AdminMessage"] is string notification)
+{
+    <div class="alert alert-success" role="status">@notification</div>
+}
+
+<div class="row g-3 mb-4">
+    <div class="col-12 col-md-4">
+        <div class="card border-0 shadow-sm h-100"><div class="card-body">
+            <span class="text-secondary">Total messages</span>
+            <strong class="display-6 d-block">@Model.TotalMessages</strong>
+        </div></div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="card border-0 shadow-sm h-100"><div class="card-body">
+            <span class="text-secondary">Unread</span>
+            <strong class="display-6 d-block">@Model.UnreadMessages</strong>
+        </div></div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="card border-0 shadow-sm h-100"><div class="card-body">
+            <span class="text-secondary">Received today</span>
+            <strong class="display-6 d-block">@Model.MessagesToday</strong>
+        </div></div>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body border-bottom">
+        <form method="get" class="row g-2 align-items-end">
+            <div class="col-12 col-lg">
+                <label for="search" class="form-label">Search</label>
+                <input id="search" name="search" value="@Model.Search" class="form-control"
+                       placeholder="Name, email, or subject" />
+            </div>
+            <div class="col-8 col-lg-3">
+                <label for="filter" class="form-label">Status</label>
+                <select id="filter" name="filter" class="form-select">
+                    <option value="all" selected="@(Model.Filter == "all" ? "selected" : null)">All messages</option>
+                    <option value="unread" selected="@(Model.Filter == "unread" ? "selected" : null)">Unread</option>
+                    <option value="read" selected="@(Model.Filter == "read" ? "selected" : null)">Read</option>
+                </select>
+            </div>
+            <div class="col-4 col-lg-auto">
+                <button class="btn btn-dark w-100" type="submit">Apply</button>
+            </div>
+        </form>
+    </div>
+
+    @if (Model.Messages.Count == 0)
+    {
+        <div class="card-body py-5 text-center">
+            <h2 class="h5">No messages found</h2>
+            <p class="text-secondary mb-0">Try changing the search or status filter.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">Sender</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Received</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var message in Model.Messages)
+                {
+                    <tr class="@(!message.IsRead ? "fw-semibold" : string.Empty)">
+                        <td>
+                            <span class="d-block">@message.FullName</span>
+                            <small class="text-secondary">@message.Email</small>
+                        </td>
+                        <td>@message.Subject</td>
+                        <td><time datetime="@message.CreatedAtUtc.ToString("O")">@message.CreatedAtUtc.ToString("dd MMM yyyy, HH:mm") UTC</time></td>
+                        <td>
+                            <span class="badge @(message.IsRead ? "text-bg-secondary" : "text-bg-primary")">
+                                @(message.IsRead ? "Read" : "Unread")
+                            </span>
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-end gap-2 flex-wrap">
+                                <a class="btn btn-sm btn-outline-dark"
+                                   asp-action="Details" asp-route-id="@message.Id">View</a>
+                                <form asp-action="SetStatus" asp-route-id="@message.Id" method="post">
+                                    <input type="hidden" name="isRead" value="@(!message.IsRead ? "true" : "false")" />
+                                    <input type="hidden" name="returnUrl" value="@returnUrl" />
+                                    <button class="btn btn-sm btn-outline-secondary" type="submit">
+                                        @(message.IsRead ? "Mark unread" : "Mark read")
+                                    </button>
+                                </form>
+                                <form asp-action="Delete" asp-route-id="@message.Id" method="post"
+                                      data-confirm="Delete this message permanently?">
+                                    <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+
+        @if (Model.TotalPages > 1)
+        {
+            <nav class="card-body border-top" aria-label="Message pages">
+                <ul class="pagination justify-content-center mb-0">
+                    @for (var pageNumber = 1; pageNumber <= Model.TotalPages; pageNumber++)
+                    {
+                        <li class="page-item @(pageNumber == Model.Page ? "active" : string.Empty)">
+                            <a class="page-link" asp-action="Index" asp-route-page="@pageNumber"
+                               asp-route-search="@Model.Search" asp-route-filter="@Model.Filter">@pageNumber</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        }
+    }
+</div>

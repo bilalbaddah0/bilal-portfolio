@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="440" viewBox="0 0 720 440" role="img" aria-labelledby="title desc">
+  <title id="title">Portfolio dashboard preview</title>
+  <desc id="desc">A stylized browser window showing a portfolio hero and admin message cards.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#17253f"/>
+      <stop offset="1" stop-color="#0d1424"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6d8cff"/>
+      <stop offset="1" stop-color="#8f72e8"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="440" fill="url(#bg)"/>
+  <circle cx="650" cy="58" r="120" fill="#375fca" opacity=".1"/>
+  <rect x="52" y="42" width="616" height="356" rx="15" fill="#f7f9fd"/>
+  <path d="M52 57a15 15 0 0 1 15-15h586a15 15 0 0 1 15 15v25H52Z" fill="#fff"/>
+  <circle cx="75" cy="62" r="5" fill="#ff727d"/>
+  <circle cx="92" cy="62" r="5" fill="#f2c65c"/>
+  <circle cx="109" cy="62" r="5" fill="#47c98d"/>
+  <rect x="140" y="54" width="270" height="16" rx="8" fill="#e7ebf3"/>
+  <rect x="78" y="110" width="34" height="34" rx="9" fill="#182440"/>
+  <text x="95" y="132" fill="#fff" font-family="Arial,sans-serif" font-size="11" font-weight="700" text-anchor="middle">BB</text>
+  <rect x="466" y="118" width="40" height="7" rx="3.5" fill="#b6c0cf"/>
+  <rect x="519" y="118" width="40" height="7" rx="3.5" fill="#b6c0cf"/>
+  <rect x="572" y="111" width="67" height="23" rx="7" fill="#244fd0"/>
+  <rect x="80" y="172" width="78" height="10" rx="5" fill="#5978d7"/>
+  <rect x="80" y="198" width="282" height="21" rx="5" fill="#17243e"/>
+  <rect x="80" y="228" width="231" height="21" rx="5" fill="#17243e"/>
+  <rect x="80" y="270" width="313" height="8" rx="4" fill="#aeb9ca"/>
+  <rect x="80" y="287" width="275" height="8" rx="4" fill="#c3cad6"/>
+  <rect x="80" y="321" width="92" height="32" rx="7" fill="#244fd0"/>
+  <rect x="183" y="321" width="92" height="32" rx="7" fill="#fff" stroke="#cbd3df"/>
+  <rect x="435" y="169" width="198" height="184" rx="13" fill="#121d31"/>
+  <rect x="453" y="188" width="57" height="6" rx="3" fill="#a78df1"/>
+  <rect x="453" y="207" width="114" height="6" rx="3" fill="#69bbed"/>
+  <rect x="453" y="226" width="155" height="6" rx="3" fill="#8090aa"/>
+  <rect x="453" y="245" width="126" height="6" rx="3" fill="#8090aa"/>
+  <rect x="453" y="280" width="65" height="35" rx="7" fill="url(#accent)" opacity=".85"/>
+  <rect x="530" y="280" width="84" height="35" rx="7" fill="#1e2e4a" stroke="#344764"/>
+  <circle cx="616" cy="374" r="12" fill="#244fd0"/>
+  <path d="m611 374 3 3 7-8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

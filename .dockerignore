@@ -1,0 +1,11 @@
+bin
+obj
+.git
+.vs
+.idea
+.vscode
+README.md
+*.user
+*.suo
+*.mdf
+*.ldf

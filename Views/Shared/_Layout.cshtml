@@ -1,0 +1,86 @@
+@inject Microsoft.Extensions.Options.IOptions<BilalPortfolio.Options.PortfolioOptions> PortfolioSettings
+@{
+    var portfolio = PortfolioSettings.Value;
+}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="@portfolio.Name is a full-stack .NET developer building dependable web applications with ASP.NET Core, C#, SQL Server, and modern frontend technologies." />
+    <meta name="author" content="@portfolio.Name" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@portfolio.Name | @portfolio.Title" />
+    <meta property="og:description" content="Portfolio, selected work, and professional experience of @portfolio.Title @portfolio.Name." />
+    <meta property="og:image" content="/images/portfolio-project.svg" />
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <script src="~/js/core/theme-init.js" asp-append-version="true"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/pages/portfolio.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BilalPortfolio.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg" aria-label="Primary navigation">
+            <div class="container">
+                <a class="navbar-brand" href="/#home" aria-label="@portfolio.Name, home">
+                    <span class="brand-mark" aria-hidden="true">BB</span>
+                    <span>@portfolio.Name</span>
+                </a>
+                <div class="d-flex align-items-center gap-2 order-lg-3">
+                    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch color theme" aria-pressed="false">
+                        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
+                        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 15.2A9 9 0 0 1 8.8 3.2 9 9 0 1 0 20.8 15.2Z"></path></svg>
+                    </button>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#portfolio-nav" aria-controls="portfolio-nav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="portfolio-nav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item"><a class="nav-link" href="/#home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#skills">Skills</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#experience">Experience</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#projects">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#education">Education</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#contact">Contact</a></li>
+                        <li class="nav-item ms-lg-2"><a class="btn btn-sm btn-nav" href="/cv" target="_blank" rel="noopener">Download CV</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div>
+                    <a class="footer-name" href="/#home">@portfolio.Name</a>
+                    <p>@portfolio.Title</p>
+                </div>
+                <div class="footer-links" aria-label="Social links">
+                    <a href="@portfolio.GitHubUrl" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="@portfolio.LinkedInUrl" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="mailto:@portfolio.Email">Email</a>
+                </div>
+            </div>
+            <div class="footer-meta">
+                <span>&copy; @DateTime.UtcNow.Year @portfolio.Name. All rights reserved.</span>
+                <span>Built with ASP.NET Core</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/pages/portfolio.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

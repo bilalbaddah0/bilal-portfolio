@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="440" viewBox="0 0 720 440" role="img" aria-labelledby="title desc">
+  <title id="title">Financial message processor preview</title>
+  <desc id="desc">A stylized application showing file processing status and a structured data table.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#15213a"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="440" fill="url(#bg)"/>
+  <path d="M0 350 720 95v345H0Z" fill="#3656a4" opacity=".08"/>
+  <rect x="48" y="40" width="624" height="360" rx="15" fill="#f5f7fb"/>
+  <path d="M48 55a15 15 0 0 1 15-15h594a15 15 0 0 1 15 15v37H48Z" fill="#fff"/>
+  <rect x="72" y="57" width="28" height="18" rx="5" fill="#204cc7"/>
+  <rect x="115" y="62" width="108" height="7" rx="3.5" fill="#23304a"/>
+  <rect x="500" y="61" width="52" height="7" rx="3.5" fill="#aab4c3"/>
+  <rect x="570" y="53" width="72" height="24" rx="6" fill="#204cc7"/>
+  <rect x="72" y="116" width="174" height="76" rx="10" fill="#fff" stroke="#dbe1eb"/>
+  <circle cx="99" cy="141" r="12" fill="#e9efff"/>
+  <path d="M94 141h10m-5-5v10" stroke="#315ed4" stroke-width="2" stroke-linecap="round"/>
+  <rect x="122" y="132" width="81" height="7" rx="3.5" fill="#9aa7ba"/>
+  <rect x="122" y="148" width="45" height="15" rx="4" fill="#1c2941"/>
+  <rect x="263" y="116" width="174" height="76" rx="10" fill="#fff" stroke="#dbe1eb"/>
+  <circle cx="290" cy="141" r="12" fill="#e8f8f2"/>
+  <path d="m284 141 4 4 8-9" fill="none" stroke="#15936e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="313" y="132" width="79" height="7" rx="3.5" fill="#9aa7ba"/>
+  <rect x="313" y="148" width="33" height="15" rx="4" fill="#1c2941"/>
+  <rect x="454" y="116" width="188" height="76" rx="10" fill="#fff" stroke="#dbe1eb"/>
+  <circle cx="481" cy="141" r="12" fill="#fff3df"/>
+  <path d="M481 134v8l5 3" fill="none" stroke="#c9861c" stroke-width="2" stroke-linecap="round"/>
+  <rect x="504" y="132" width="86" height="7" rx="3.5" fill="#9aa7ba"/>
+  <rect x="504" y="148" width="26" height="15" rx="4" fill="#1c2941"/>
+  <rect x="72" y="216" width="570" height="154" rx="10" fill="#fff" stroke="#dbe1eb"/>
+  <path d="M72 255h570" stroke="#dbe1eb"/>
+  <rect x="91" y="232" width="74" height="7" rx="3.5" fill="#687790"/>
+  <rect x="218" y="232" width="72" height="7" rx="3.5" fill="#687790"/>
+  <rect x="360" y="232" width="64" height="7" rx="3.5" fill="#687790"/>
+  <rect x="508" y="232" width="71" height="7" rx="3.5" fill="#687790"/>
+  <g fill="#b5bfcd">
+    <rect x="91" y="273" width="82" height="6" rx="3"/><rect x="218" y="273" width="88" height="6" rx="3"/><rect x="360" y="273" width="55" height="6" rx="3"/>
+    <rect x="91" y="311" width="67" height="6" rx="3"/><rect x="218" y="311" width="105" height="6" rx="3"/><rect x="360" y="311" width="71" height="6" rx="3"/>
+    <rect x="91" y="349" width="91" height="6" rx="3"/><rect x="218" y="349" width="76" height="6" rx="3"/><rect x="360" y="349" width="62" height="6" rx="3"/>
+  </g>
+  <g fill="#e6f6f0">
+    <rect x="508" y="267" width="66" height="18" rx="9"/><rect x="508" y="305" width="66" height="18" rx="9"/><rect x="508" y="343" width="66" height="18" rx="9"/>
+  </g>
+  <g fill="#158661"><circle cx="520" cy="276" r="3"/><circle cx="520" cy="314" r="3"/><circle cx="520" cy="352" r="3"/></g>
+</svg>

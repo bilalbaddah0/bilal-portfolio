@@ -1,0 +1,36 @@
+@model BilalPortfolio.Models.ContactMessage
+@{
+    ViewData["Title"] = "Message details";
+    Layout = "_AdminLayout";
+}
+
+<a class="link-secondary text-decoration-none d-inline-block mb-3" asp-action="Index">&larr; Back to messages</a>
+<article class="card border-0 shadow-sm">
+    <div class="card-body p-4 p-lg-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mb-4">
+            <div>
+                <span class="badge @(Model.IsRead ? "text-bg-secondary" : "text-bg-primary") mb-2">
+                    @(Model.IsRead ? "Read" : "Unread")
+                </span>
+                <h1 class="h3 mb-2">@Model.Subject</h1>
+                <p class="mb-0"><strong>@Model.FullName</strong> &lt;<a href="mailto:@Model.Email">@Model.Email</a>&gt;</p>
+            </div>
+            <time class="text-secondary" datetime="@Model.CreatedAtUtc.ToString("O")">
+                @Model.CreatedAtUtc.ToString("dd MMMM yyyy, HH:mm") UTC
+            </time>
+        </div>
+        <div class="border-top pt-4 mb-4" style="white-space: pre-wrap">@Model.Message</div>
+        <div class="d-flex gap-2 flex-wrap">
+            <form asp-action="SetStatus" asp-route-id="@Model.Id" method="post">
+                <input type="hidden" name="isRead" value="@(!Model.IsRead ? "true" : "false")" />
+                <button class="btn btn-outline-dark" type="submit">
+                    @(Model.IsRead ? "Mark as unread" : "Mark as read")
+                </button>
+            </form>
+            <form asp-action="Delete" asp-route-id="@Model.Id" method="post"
+                  data-confirm="Delete this message permanently?">
+                <button class="btn btn-outline-danger" type="submit">Delete message</button>
+            </form>
+        </div>
+    </div>
+</article>
