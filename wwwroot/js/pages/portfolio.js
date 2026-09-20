@@ -110,12 +110,7 @@ function setupContactForm() {
         setLoading(submitButton, true);
 
         try {
-            const response = await fetch(form.action, {
-                method: "POST",
-                body: new FormData(form),
-                headers: { "Accept": "application/json" },
-                credentials: "same-origin"
-            });
+            const response = await submitContactForm(form);
 
             const result = await readResponse(response);
 
@@ -137,6 +132,33 @@ function setupContactForm() {
             setLoading(submitButton, false);
         }
     });
+}
+
+async function submitContactForm(form) {
+    const temporaryFailureStatuses = new Set([502, 503, 504]);
+    let lastError;
+
+    for (let attempt = 0; attempt < 2; attempt += 1) {
+        try {
+            const response = await fetch(form.action, {
+                method: "POST",
+                body: new FormData(form),
+                headers: { "Accept": "application/json" },
+                credentials: "same-origin"
+            });
+
+            if (!temporaryFailureStatuses.has(response.status) || attempt === 1) {
+                return response;
+            }
+        } catch (error) {
+            lastError = error;
+            if (attempt === 1) throw error;
+        }
+
+        await new Promise(resolve => window.setTimeout(resolve, 1000));
+    }
+
+    throw lastError || new Error("The contact request did not complete.");
 }
 
 async function readResponse(response) {
