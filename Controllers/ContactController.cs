@@ -2,7 +2,6 @@ using BilalPortfolio.DTOs;
 using BilalPortfolio.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
-using Microsoft.EntityFrameworkCore;
 
 namespace BilalPortfolio.Controllers;
 
@@ -28,7 +27,7 @@ public sealed class ContactController(
             await messageService.CreateAsync(request, cancellationToken);
             return Ok(new { success = true, message = "Thank you. Your message has been sent." });
         }
-        catch (DbUpdateException exception)
+        catch (Exception exception)
         {
             logger.LogError(exception, "Unable to save a contact message.");
             return StatusCode(StatusCodes.Status503ServiceUnavailable, new

@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Console.WriteLine("BilalPortfolio: application startup entered.");
+
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
@@ -24,7 +26,12 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' was not found.");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(
+        connectionString,
+        sqlOptions => sqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 3,
+            maxRetryDelay: TimeSpan.FromSeconds(5),
+            errorNumbersToAdd: null)));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services
@@ -118,10 +125,22 @@ app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
 
-using (var scope = app.Services.CreateScope())
+if (builder.Configuration.GetValue<bool>("Admin:SeedOnStartup"))
 {
-    await scope.ServiceProvider.GetRequiredService<AdminSeeder>().SeedAsync();
+    using var scope = app.Services.CreateScope();
+    try
+    {
+        await scope.ServiceProvider.GetRequiredService<AdminSeeder>().SeedAsync();
+    }
+    catch (Exception exception)
+    {
+        app.Logger.LogError(
+            exception,
+            "The database is unavailable during startup; admin seeding was skipped so the website can continue running.");
+    }
 }
+
+app.Logger.LogInformation("BilalPortfolio startup completed; beginning request processing.");
 
 app.Run();
 
